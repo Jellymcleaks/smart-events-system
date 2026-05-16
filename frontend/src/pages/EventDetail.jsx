@@ -39,20 +39,20 @@ export default function EventDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
       </div>
     );
   }
 
   if (error || !event) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-lg shadow-md p-8 max-w-md">
-          <p className="text-red-600 mb-4">{error || "Event not found"}</p>
+      <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center px-4">
+        <div className="glass-card backdrop-blur-xl border border-purple-500/30 rounded-2xl p-8 max-w-md">
+          <p className="text-red-400 mb-4">{error || "Event not found"}</p>
           <button
             onClick={() => navigate("/events")}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            className="btn-glass-primary w-full"
           >
             Back to Events
           </button>
@@ -76,19 +76,19 @@ export default function EventDetail() {
   ).toFixed(0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Back Button */}
         <button
           onClick={() => navigate("/events")}
-          className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 mb-6"
+          className="flex items-center space-x-2 text-purple-400 hover:text-purple-300 mb-6 transition"
         >
           <ArrowLeft size={20} />
           <span>Back to Events</span>
         </button>
 
         {/* Event Card */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="glass-card hover:glass-card-hover backdrop-blur-xl border border-purple-500/30 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/20">
           {/* Event Image */}
           <img
             src={
@@ -101,95 +101,106 @@ export default function EventDetail() {
           {/* Event Details */}
           <div className="p-8">
             {/* Category */}
-            <span className="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <span className="inline-block glass-card backdrop-blur-sm border border-purple-500/30 text-purple-300 px-4 py-2 rounded-full text-sm font-semibold mb-4 shadow-lg shadow-purple-500/20">
               {event.category}
             </span>
 
             {/* Title */}
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
               {event.title}
             </h1>
 
             {/* Description */}
-            <p className="text-gray-700 text-lg mb-8">{event.description}</p>
+            <p className="text-gray-300 text-lg mb-8">{event.description}</p>
 
             {/* Event Info Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 pb-8 border-b">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pb-8 border-b border-purple-500/20">
               {/* Date & Time */}
-              <div className="flex items-start space-x-4">
-                <Calendar
-                  className="text-blue-600 mt-1 flex-shrink-0"
-                  size={24}
-                />
-                <div>
-                  <p className="text-gray-600 text-sm">Date & Time</p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {formattedDate} at {event.time}
-                  </p>
+              <div className="glass-card-interactive backdrop-blur-sm border border-purple-500/20 rounded-xl p-4">
+                <div className="flex items-start space-x-3">
+                  <Calendar
+                    className="text-purple-400 mt-1 flex-shrink-0"
+                    size={24}
+                  />
+                  <div>
+                    <p className="text-gray-400 text-sm">Date & Time</p>
+                    <p className="text-lg font-semibold text-white">
+                      {formattedDate} at {event.time}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Location */}
-              <div className="flex items-start space-x-4">
-                <MapPin
-                  className="text-blue-600 mt-1 flex-shrink-0"
-                  size={24}
-                />
-                <div>
-                  <p className="text-gray-600 text-sm">Location</p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {event.location}
-                  </p>
+              <div className="glass-card-interactive backdrop-blur-sm border border-purple-500/20 rounded-xl p-4">
+                <div className="flex items-start space-x-3">
+                  <MapPin
+                    className="text-pink-400 mt-1 flex-shrink-0"
+                    size={24}
+                  />
+                  <div>
+                    <p className="text-gray-400 text-sm">Location</p>
+                    <p className="text-lg font-semibold text-white">
+                      {event.location}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Capacity */}
-              <div className="flex items-start space-x-4">
-                <Users className="text-blue-600 mt-1 flex-shrink-0" size={24} />
-                <div>
-                  <p className="text-gray-600 text-sm">Attendees</p>
-                  <p className="text-lg font-semibold text-gray-900">
-                    {event.attendees}/{event.capacity}
-                  </p>
+              <div className="glass-card-interactive backdrop-blur-sm border border-purple-500/20 rounded-xl p-4">
+                <div className="flex items-start space-x-3">
+                  <Users
+                    className="text-purple-400 mt-1 flex-shrink-0"
+                    size={24}
+                  />
+                  <div>
+                    <p className="text-gray-400 text-sm">Attendees</p>
+                    <p className="text-lg font-semibold text-white">
+                      {event.attendees}/{event.capacity}
+                    </p>
+                  </div>
                 </div>
               </div>
 
               {/* Price */}
-              <div className="flex items-start space-x-4">
-                <DollarSign
-                  className="text-green-600 mt-1 flex-shrink-0"
-                  size={24}
-                />
-                <div>
-                  <p className="text-gray-600 text-sm">Ticket Price</p>
-                  <p className="text-lg font-semibold text-green-600">
-                    ${event.ticketPrice}
-                  </p>
+              <div className="glass-card-interactive backdrop-blur-sm border border-purple-500/20 rounded-xl p-4">
+                <div className="flex items-start space-x-3">
+                  <DollarSign
+                    className="text-pink-400 mt-1 flex-shrink-0"
+                    size={24}
+                  />
+                  <div>
+                    <p className="text-gray-400 text-sm">Ticket Price</p>
+                    <p className="text-lg font-semibold text-pink-400">
+                      ${event.ticketPrice}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Capacity Bar */}
             <div className="mb-8">
-              <div className="flex justify-between text-sm text-gray-600 mb-2">
+              <div className="flex justify-between text-sm text-gray-400 mb-2">
                 <span>Seats Availability</span>
                 <span>{occupancyPercentage}% filled</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="w-full bg-white/5 border border-purple-500/20 rounded-full h-3">
                 <div
-                  className="bg-blue-600 h-3 rounded-full transition-all"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 h-3 rounded-full transition-all shadow-lg shadow-purple-500/50"
                   style={{ width: `${occupancyPercentage}%` }}
                 ></div>
               </div>
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm text-gray-400 mt-2">
                 {seatsAvailable} seats available
               </p>
             </div>
 
             {/* Organizer Info */}
-            <div className="bg-gray-100 p-4 rounded-lg mb-8">
-              <p className="text-gray-600 text-sm">Organized by</p>
-              <p className="font-semibold text-gray-900">
+            <div className="glass-card-interactive backdrop-blur-sm border border-purple-500/20 rounded-xl p-4 mb-8">
+              <p className="text-gray-400 text-sm">Organized by</p>
+              <p className="font-semibold text-white">
                 {event.organizerId?.name || "Unknown Organizer"}
               </p>
             </div>
@@ -198,21 +209,21 @@ export default function EventDetail() {
             {user && user.role === "user" && seatsAvailable > 0 ? (
               <button
                 onClick={() => setShowBookingModal(true)}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-lg"
+                className="btn-glass-primary w-full"
               >
                 Book Tickets Now
               </button>
             ) : user && user.role === "user" ? (
               <button
                 disabled
-                className="w-full bg-gray-400 text-white py-3 rounded-lg font-semibold text-lg cursor-not-allowed"
+                className="w-full py-3 rounded-lg font-semibold text-lg bg-gray-500/20 border border-gray-500/30 text-gray-400 cursor-not-allowed"
               >
                 Event is Full
               </button>
             ) : !user ? (
               <button
                 onClick={() => navigate("/login")}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-lg"
+                className="btn-glass-primary w-full"
               >
                 Login to Book
               </button>

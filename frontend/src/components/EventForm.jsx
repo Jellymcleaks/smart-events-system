@@ -68,15 +68,15 @@ export default function EventForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-lg shadow-md p-6 space-y-4"
+      className="glass-card backdrop-blur-xl border border-purple-500/30 rounded-2xl p-8 space-y-6 shadow-2xl shadow-purple-500/20"
     >
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-8">
         {initialData ? "Edit Event" : "Create New Event"}
       </h2>
 
       {/* Title */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-purple-300 mb-2">
           Event Title *
         </label>
         <input
@@ -84,19 +84,19 @@ export default function EventForm({
           name="title"
           value={formData.title}
           onChange={handleChange}
-          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            errors.title ? "border-red-500" : "border-gray-300"
+          className={`glass-input w-full ${
+            errors.title ? "border-red-500/50 bg-red-500/10" : ""
           }`}
           placeholder="Enter event title"
         />
         {errors.title && (
-          <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+          <p className="text-red-400 text-sm mt-1">{errors.title}</p>
         )}
       </div>
 
       {/* Description */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-purple-300 mb-2">
           Description *
         </label>
         <textarea
@@ -104,26 +104,26 @@ export default function EventForm({
           value={formData.description}
           onChange={handleChange}
           rows="4"
-          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            errors.description ? "border-red-500" : "border-gray-300"
+          className={`glass-input w-full ${
+            errors.description ? "border-red-500/50 bg-red-500/10" : ""
           }`}
           placeholder="Describe your event"
         ></textarea>
         {errors.description && (
-          <p className="text-red-500 text-sm mt-1">{errors.description}</p>
+          <p className="text-red-400 text-sm mt-1">{errors.description}</p>
         )}
       </div>
 
       {/* Category */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-purple-300 mb-2">
           Category *
         </label>
         <select
           name="category"
           value={formData.category}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="glass-input w-full"
         >
           {EVENT_CATEGORIES.map((cat) => (
             <option key={cat} value={cat}>
@@ -136,7 +136,7 @@ export default function EventForm({
       {/* Date and Time */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-purple-300 mb-2">
             Date *
           </label>
           <input
@@ -144,17 +144,17 @@ export default function EventForm({
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.date ? "border-red-500" : "border-gray-300"
+            className={`glass-input w-full ${
+              errors.date ? "border-red-500/50 bg-red-500/10" : ""
             }`}
           />
           {errors.date && (
-            <p className="text-red-500 text-sm mt-1">{errors.date}</p>
+            <p className="text-red-400 text-sm mt-1">{errors.date}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-purple-300 mb-2">
             Time *
           </label>
           <input
@@ -162,14 +162,14 @@ export default function EventForm({
             name="time"
             value={formData.time}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="glass-input w-full"
           />
         </div>
       </div>
 
       {/* Location */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-purple-300 mb-2">
           Location *
         </label>
         <input
@@ -177,20 +177,20 @@ export default function EventForm({
           name="location"
           value={formData.location}
           onChange={handleChange}
-          className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            errors.location ? "border-red-500" : "border-gray-300"
+          className={`glass-input w-full ${
+            errors.location ? "border-red-500/50 bg-red-500/10" : ""
           }`}
           placeholder="Event location"
         />
         {errors.location && (
-          <p className="text-red-500 text-sm mt-1">{errors.location}</p>
+          <p className="text-red-400 text-sm mt-1">{errors.location}</p>
         )}
       </div>
 
       {/* Capacity and Price */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-purple-300 mb-2">
             Capacity *
           </label>
           <input
@@ -199,18 +199,18 @@ export default function EventForm({
             value={formData.capacity}
             onChange={handleChange}
             min="1"
-            className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.capacity ? "border-red-500" : "border-gray-300"
+            className={`glass-input w-full ${
+              errors.capacity ? "border-red-500/50 bg-red-500/10" : ""
             }`}
             placeholder="Number of seats"
           />
           {errors.capacity && (
-            <p className="text-red-500 text-sm mt-1">{errors.capacity}</p>
+            <p className="text-red-400 text-sm mt-1">{errors.capacity}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-semibold text-purple-300 mb-2">
             Ticket Price ($) *
           </label>
           <input
@@ -220,23 +220,23 @@ export default function EventForm({
             onChange={handleChange}
             min="0"
             step="0.01"
-            className={`w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-              errors.ticketPrice ? "border-red-500" : "border-gray-300"
+            className={`glass-input w-full ${
+              errors.ticketPrice ? "border-red-500/50 bg-red-500/10" : ""
             }`}
             placeholder="Price per ticket"
           />
           {errors.ticketPrice && (
-            <p className="text-red-500 text-sm mt-1">{errors.ticketPrice}</p>
+            <p className="text-red-400 text-sm mt-1">{errors.ticketPrice}</p>
           )}
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="flex space-x-4 pt-4">
+      <div className="flex space-x-4 pt-6">
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition font-semibold disabled:bg-gray-400"
+          className="btn-glass-primary flex-1"
         >
           {loading
             ? "Processing..."

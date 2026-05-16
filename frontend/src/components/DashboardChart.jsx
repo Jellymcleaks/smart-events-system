@@ -28,52 +28,72 @@ export default function DashboardChart({
   if (!data || data.length === 0) {
     return (
       <div
-        className="bg-white rounded-lg shadow-md p-6 flex items-center justify-center"
+        className="glass-card backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 flex items-center justify-center shadow-lg shadow-purple-500/10"
         style={{ height }}
       >
-        <p className="text-gray-500">No data available</p>
+        <p className="text-gray-400">No data available</p>
       </div>
     );
   }
 
   const COLORS = [
-    "#3B82F6",
-    "#8B5CF6",
-    "#EC4899",
-    "#F59E0B",
-    "#10B981",
-    "#EF4444",
+    "#A855F7", // Purple
+    "#EC4899", // Pink
+    "#8B5CF6", // Violet
+    "#F59E0B", // Amber
+    "#10B981", // Emerald
+    "#06B6D4", // Cyan
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="glass-card backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 shadow-lg shadow-purple-500/10">
       {title && (
-        <h3 className="text-lg font-bold text-gray-800 mb-4">{title}</h3>
+        <h3 className="text-lg font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+          {title}
+        </h3>
       )}
 
       <ResponsiveContainer width="100%" height={height}>
         {type === "bar" && (
           <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="rgba(255,255,255,0.1)"
+            />
+            <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" />
+            <YAxis stroke="rgba(255,255,255,0.5)" />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(0,0,0,0.8)",
+                border: "1px solid rgba(168, 85, 247, 0.3)",
+                borderRadius: "0.5rem",
+              }}
+            />
             <Legend />
-            <Bar dataKey="value" fill="#3B82F6" />
+            <Bar dataKey="value" fill="#A855F7" />
           </BarChart>
         )}
 
         {type === "line" && (
           <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="rgba(255,255,255,0.1)"
+            />
+            <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" />
+            <YAxis stroke="rgba(255,255,255,0.5)" />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "rgba(0,0,0,0.8)",
+                border: "1px solid rgba(168, 85, 247, 0.3)",
+                borderRadius: "0.5rem",
+              }}
+            />
             <Legend />
             <Line
               type="monotone"
               dataKey="value"
-              stroke="#3B82F6"
+              stroke="#A855F7"
               strokeWidth={2}
             />
           </LineChart>
@@ -88,7 +108,7 @@ export default function DashboardChart({
               labelLine={false}
               label={({ name, value }) => `${name}: $${value}`}
               outerRadius={80}
-              fill="#8884d8"
+              fill="#A855F7"
               dataKey="value"
             >
               {data.map((entry, index) => (
@@ -98,7 +118,14 @@ export default function DashboardChart({
                 />
               ))}
             </Pie>
-            <Tooltip formatter={(value) => `$${value}`} />
+            <Tooltip
+              formatter={(value) => `$${value}`}
+              contentStyle={{
+                backgroundColor: "rgba(0,0,0,0.8)",
+                border: "1px solid rgba(168, 85, 247, 0.3)",
+                borderRadius: "0.5rem",
+              }}
+            />
           </PieChart>
         )}
       </ResponsiveContainer>

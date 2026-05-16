@@ -77,15 +77,15 @@ export default function OrganizerDashboard() {
   const COLORS = ["#3B82F6", "#8B5CF6"];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Organizer Dashboard
           </h1>
           <button
             onClick={() => navigate("/create-event")}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition flex items-center space-x-2"
+            className="btn-glass-primary flex items-center space-x-2"
           >
             <Plus size={20} />
             <span>Create Event</span>
@@ -93,44 +93,44 @@ export default function OrganizerDashboard() {
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg mb-8 backdrop-blur-sm">
             {error}
           </div>
         )}
 
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
           </div>
         ) : (
           <>
             {/* Stats Cards */}
             {stats && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <p className="text-gray-600 text-sm">Total Events</p>
-                  <p className="text-4xl font-bold text-blue-600 mt-2">
+                <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-xl p-6 shadow-lg shadow-purple-500/10">
+                  <p className="text-gray-400 text-sm">Total Events</p>
+                  <p className="text-4xl font-bold text-purple-400 mt-2">
                     {stats.totalEvents}
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <p className="text-gray-600 text-sm">Total Bookings</p>
-                  <p className="text-4xl font-bold text-purple-600 mt-2">
+                <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-xl p-6 shadow-lg shadow-purple-500/10">
+                  <p className="text-gray-400 text-sm">Total Bookings</p>
+                  <p className="text-4xl font-bold text-pink-400 mt-2">
                     {stats.totalBookings}
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <p className="text-gray-600 text-sm">Total Revenue</p>
-                  <p className="text-4xl font-bold text-green-600 mt-2">
+                <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-xl p-6 shadow-lg shadow-purple-500/10">
+                  <p className="text-gray-400 text-sm">Total Revenue</p>
+                  <p className="text-4xl font-bold text-green-400 mt-2">
                     ${stats.totalRevenue?.toFixed(2)}
                   </p>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <p className="text-gray-600 text-sm">Avg Revenue/Event</p>
-                  <p className="text-4xl font-bold text-orange-600 mt-2">
+                <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-xl p-6 shadow-lg shadow-purple-500/10">
+                  <p className="text-gray-400 text-sm">Avg Revenue/Event</p>
+                  <p className="text-4xl font-bold text-orange-400 mt-2">
                     ${stats.averageRevenuePerEvent}
                   </p>
                 </div>
@@ -140,14 +140,17 @@ export default function OrganizerDashboard() {
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Bar Chart */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">
+              <div className="glass-card backdrop-blur-md border border-purple-500/30 rounded-xl p-6 shadow-lg shadow-purple-500/10">
+                <h3 className="text-lg font-bold text-purple-300 mb-4">
                   Overview
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="rgba(255,255,255,0.1)"
+                    />
+                    <XAxis dataKey="name" stroke="rgba(255,255,255,0.5)" />
                     <YAxis />
                     <Tooltip />
                     <Bar dataKey="value" fill="#3B82F6" />

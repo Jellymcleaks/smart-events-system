@@ -16,14 +16,14 @@ export default function CreateEvent() {
   // Redirect if not organizer
   if (user && user.role !== "organizer") {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-md p-8 max-w-md text-center">
-          <p className="text-gray-700 mb-4">
+      <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center">
+        <div className="glass-card backdrop-blur-xl border border-purple-500/30 rounded-2xl p-8 max-w-md text-center shadow-2xl shadow-purple-500/20">
+          <p className="text-gray-300 mb-4">
             Only organizers can create events
           </p>
           <button
             onClick={() => navigate("/")}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            className="btn-glass-primary w-full"
           >
             Go Home
           </button>
@@ -47,10 +47,10 @@ export default function CreateEvent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg mb-6 backdrop-blur-sm">
             {error}
           </div>
         )}

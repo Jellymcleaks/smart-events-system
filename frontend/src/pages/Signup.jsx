@@ -91,14 +91,23 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-8">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-          Sign Up
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black flex items-center justify-center px-4 py-8 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/15 rounded-full mix-blend-screen filter blur-3xl animate-float" />
+        <div
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/15 rounded-full mix-blend-screen filter blur-3xl animate-float"
+          style={{ animationDelay: "-2s" }}
+        />
+      </div>
+
+      <div className="relative glass-card backdrop-blur-xl border border-purple-500/30 rounded-2xl p-8 max-w-md w-full shadow-2xl shadow-purple-500/20">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 text-center">
+          Join Us
         </h1>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg mb-4 backdrop-blur-sm">
             {error}
           </div>
         )}
@@ -106,7 +115,7 @@ export default function Signup() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-purple-300 mb-2">
               Full Name *
             </label>
             <input
@@ -115,14 +124,14 @@ export default function Signup() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="glass-input w-full"
               placeholder="John Doe"
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-purple-300 mb-2">
               Email *
             </label>
             <input
@@ -131,21 +140,21 @@ export default function Signup() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="glass-input w-full"
               placeholder="your@email.com"
             />
           </div>
 
           {/* Role */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-purple-300 mb-2">
               Sign up as *
             </label>
             <select
               name="role"
               value={formData.role}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="glass-input w-full"
             >
               <option value="user">User (Browse & Book Events)</option>
               <option value="organizer">Organizer (Create Events)</option>
@@ -154,7 +163,7 @@ export default function Signup() {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-purple-300 mb-2">
               Password *
             </label>
             <input
@@ -163,14 +172,14 @@ export default function Signup() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="glass-input w-full"
               placeholder="••••••••"
             />
           </div>
 
           {/* Confirm Password */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-purple-300 mb-2">
               Confirm Password *
             </label>
             <input
@@ -179,7 +188,7 @@ export default function Signup() {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="glass-input w-full"
               placeholder="••••••••"
             />
           </div>
@@ -188,18 +197,18 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition font-semibold disabled:bg-gray-400"
+            className="btn-glass-primary w-full mt-6"
           >
             {loading ? "Creating account..." : "Sign Up"}
           </button>
         </form>
 
         {/* Login Link */}
-        <p className="text-center text-gray-600 mt-4">
+        <p className="text-center text-gray-400 mt-6">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-blue-600 hover:underline font-semibold"
+            className="text-purple-400 hover:text-purple-300 underline font-semibold transition"
           >
             Login
           </Link>

@@ -52,28 +52,30 @@ export default function UserBookings() {
   const cancelledBookings = bookings.filter((b) => b.status === "cancelled");
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">My Bookings</h1>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-8">
+          My Bookings
+        </h1>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-8">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-3 rounded-lg mb-8 backdrop-blur-sm">
             {error}
           </div>
         )}
 
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
           </div>
         ) : bookings.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 text-lg mb-6">
+          <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-2xl p-12 text-center shadow-lg shadow-purple-500/10">
+            <p className="text-gray-400 text-lg mb-6">
               You haven't booked any events yet
             </p>
             <button
               onClick={() => navigate("/events")}
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+              className="btn-glass-primary"
             >
               Browse Events
             </button>
@@ -83,21 +85,21 @@ export default function UserBookings() {
             {/* Confirmed Bookings */}
             {confirmedBookings.length > 0 && (
               <div className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                <h2 className="text-2xl font-bold text-purple-300 mb-6">
                   Confirmed Bookings ({confirmedBookings.length})
                 </h2>
                 <div className="space-y-4">
                   {confirmedBookings.map((booking) => (
                     <div
                       key={booking._id}
-                      className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-600"
+                      className="glass-card hover:glass-card-hover backdrop-blur-md border border-green-500/30 rounded-xl p-6 shadow-lg shadow-green-500/10"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold text-gray-900">
+                          <h3 className="text-xl font-bold text-white">
                             {booking.eventId?.title}
                           </h3>
-                          <div className="mt-2 space-y-1 text-gray-600">
+                          <div className="mt-2 space-y-1 text-gray-400">
                             <p>
                               <span className="font-semibold">Date:</span>{" "}
                               {new Date(

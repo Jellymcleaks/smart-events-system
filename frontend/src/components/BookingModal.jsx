@@ -42,14 +42,16 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-md w-full">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="glass-card backdrop-blur-2xl border border-purple-500/40 rounded-2xl max-w-md w-full shadow-2xl shadow-purple-500/30">
         {/* Header */}
-        <div className="flex justify-between items-center p-6 border-b">
-          <h2 className="text-xl font-bold text-gray-800">Book Tickets</h2>
+        <div className="flex justify-between items-center p-6 border-b border-purple-500/20">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Book Tickets
+          </h2>
           <button
             onClick={handleClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-purple-400 hover:text-purple-300 transition"
           >
             <X size={24} />
           </button>
@@ -59,19 +61,21 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Event Title */}
           <div>
-            <p className="text-sm text-gray-600">Event</p>
-            <p className="font-semibold text-gray-800">{event.title}</p>
+            <p className="text-sm text-gray-400">Event</p>
+            <p className="font-semibold text-white">{event.title}</p>
           </div>
 
           {/* Ticket Price */}
           <div>
-            <p className="text-sm text-gray-600">Price per Ticket</p>
-            <p className="font-semibold text-green-600">${event.ticketPrice}</p>
+            <p className="text-sm text-gray-400">Price per Ticket</p>
+            <p className="font-semibold text-purple-400">
+              ${event.ticketPrice}
+            </p>
           </div>
 
           {/* Quantity */}
           <div>
-            <label className="block text-sm font-semibold text-gray-800 mb-2">
+            <label className="block text-sm font-semibold text-purple-300 mb-2">
               Number of Tickets
             </label>
             <input
@@ -80,18 +84,18 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
               max={seatsAvailable}
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2"
+              className="glass-input w-full"
             />
-            <p className="text-xs text-gray-600 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Available seats: {seatsAvailable}
             </p>
           </div>
 
           {/* Total Price */}
-          <div className="bg-gray-100 p-3 rounded">
+          <div className="glass-card-interactive backdrop-blur-sm border border-purple-500/20 rounded-xl p-4">
             <div className="flex justify-between">
-              <span className="text-gray-700">Total Price:</span>
-              <span className="font-bold text-lg text-blue-600">
+              <span className="text-gray-400">Total Price:</span>
+              <span className="font-bold text-lg bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 ${totalPrice.toFixed(2)}
               </span>
             </div>
@@ -99,7 +103,7 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
 
           {/* Error */}
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">
+            <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-2 rounded backdrop-blur-sm">
               {error}
             </div>
           )}
@@ -109,14 +113,14 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400 transition font-semibold"
+              className="btn-glass-secondary flex-1"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading || seatsAvailable === 0}
-              className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition font-semibold disabled:bg-gray-400"
+              className="btn-glass-primary flex-1"
             >
               {loading ? "Processing..." : "Confirm Booking"}
             </button>

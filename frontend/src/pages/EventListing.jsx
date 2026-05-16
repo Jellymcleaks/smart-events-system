@@ -48,32 +48,32 @@ export default function EventListing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-900 to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-12 animate-float-in">
           <div className="flex items-center space-x-3 mb-4">
-            <Search className="text-cyan-400" size={32} />
-            <h1 className="text-4xl md:text-5xl font-bold text-white">
+            <Search className="text-purple-400 animate-pulse" size={32} />
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Discover Events
             </h1>
           </div>
-          <p className="text-xl text-gray-300">
+          <p className="text-xl text-gray-300 hover:text-gray-200 transition">
             Find and book amazing events happening near you
           </p>
         </div>
 
         {/* Filters Section */}
-        <div className="bg-gradient-to-r from-white/5 to-white/10 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-8 mb-12 hover:from-white/10 hover:to-white/15 transition">
+        <div className="glass-card hover:glass-card-hover backdrop-blur-xl border border-purple-500/30 rounded-2xl shadow-xl shadow-purple-500/10 p-8 mb-12 transition">
           <div className="flex items-center space-x-3 mb-6">
-            <Sliders className="text-cyan-400" size={24} />
+            <Sliders className="text-purple-400" size={24} />
             <h2 className="text-2xl font-bold text-white">Filters</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {/* Search */}
             <div>
-              <label className="block text-sm font-semibold text-cyan-400 mb-3">
+              <label className="block text-sm font-semibold text-purple-300 mb-3">
                 Search Event
               </label>
               <div className="relative">
@@ -87,21 +87,21 @@ export default function EventListing() {
                   value={filters.search}
                   onChange={handleFilterChange}
                   placeholder="Event name..."
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/30 transition hover:bg-white/10 hover:border-white/20"
+                  className="glass-input w-full pl-10"
                 />
               </div>
             </div>
 
             {/* Category */}
             <div>
-              <label className="block text-sm font-semibold text-cyan-400 mb-3">
+              <label className="block text-sm font-semibold text-purple-300 mb-3">
                 Category
               </label>
               <select
                 name="category"
                 value={filters.category}
                 onChange={handleFilterChange}
-                className="w-full px-4 py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/30 transition appearance-none hover:bg-white/10 hover:border-white/20"
+                className="glass-input w-full"
               >
                 <option value="">All Categories</option>
                 {EVENT_CATEGORIES.map((cat) => (
@@ -114,7 +114,7 @@ export default function EventListing() {
 
             {/* Location */}
             <div>
-              <label className="block text-sm font-semibold text-cyan-400 mb-3">
+              <label className="block text-sm font-semibold text-purple-300 mb-3">
                 Location
               </label>
               <input
@@ -123,7 +123,7 @@ export default function EventListing() {
                 value={filters.location}
                 onChange={handleFilterChange}
                 placeholder="City, venue..."
-                className="w-full px-4 py-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/30 transition hover:bg-white/10 hover:border-white/20"
+                className="glass-input w-full"
               />
             </div>
 
@@ -133,7 +133,7 @@ export default function EventListing() {
                 onClick={() =>
                   setFilters({ category: "", search: "", location: "" })
                 }
-                className="w-full bg-slate-600 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition duration-300"
+                className="btn-glass-secondary w-full"
               >
                 Clear Filters
               </button>
@@ -143,9 +143,9 @@ export default function EventListing() {
 
         {/* Results Info */}
         <div className="mb-8">
-          <div className="bg-white/5 backdrop-blur-md border border-cyan-400/30 rounded-lg px-6 py-4 hover:bg-white/10 hover:border-cyan-400/50 transition">
+          <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-lg px-6 py-4 transition">
             <p className="text-gray-300">
-              <span className="text-cyan-400 font-bold">{events.length}</span>{" "}
+              <span className="text-purple-400 font-bold">{events.length}</span>{" "}
               events found
               {filters.search && ` matching "${filters.search}"`}
               {filters.category && ` in ${filters.category}`}
