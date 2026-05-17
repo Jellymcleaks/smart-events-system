@@ -14,6 +14,18 @@ export const createBooking = async (bookingData) => {
 };
 
 /**
+ * Get user's booked event IDs
+ */
+export const getUserBookedEventIds = async () => {
+  try {
+    const response = await api.get("/bookings/user/booked-events");
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+};
+
+/**
  * Get user's bookings
  */
 export const getUserBookings = async () => {

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Search, Filter, Sliders } from "lucide-react";
+import { Search, Sliders } from "lucide-react";
 import EventCard from "../components/EventCard";
 import { getAllEvents } from "../services/eventService";
+import { getUserBookedEventIds } from "../services/bookingService";
+import { useAuth } from "../context/AuthContext";
 import { EVENT_CATEGORIES } from "../utils/constants";
 
 /**
@@ -9,6 +11,7 @@ import { EVENT_CATEGORIES } from "../utils/constants";
  */
 export default function EventListing() {
   const [events, setEvents] = useState([]);
+  const [bookedEventIds, setBookedEventIds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [filters, setFilters] = useState({
@@ -16,10 +19,14 @@ export default function EventListing() {
     search: "",
     location: "",
   });
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchEvents();
-  }, [filters]);
+    if (user) {
+      fetchBookedEvents();
+    }
+  }, [filters, user]);
 
   const fetchEvents = async () => {
     setLoading(true);
@@ -34,6 +41,15 @@ export default function EventListing() {
     }
   };
 
+  const fetchBookedEvents = async () => {
+    try {
+      const data = await getUserBookedEventIds();
+      setBookedEventIds(data.bookedEventIds || []);
+    } catch (err) {
+      console.error("Error fetching booked events:", err);
+    }
+  };
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({
@@ -42,10 +58,10 @@ export default function EventListing() {
     }));
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    fetchEvents();
-  };
+  // Filter out booked events
+  const availableEvents = events.filter(
+    (event) => !bookedEventIds.includes(event._id),
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black">
@@ -145,11 +161,18 @@ export default function EventListing() {
         <div className="mb-8">
           <div className="glass-card hover:glass-card-hover backdrop-blur-md border border-purple-500/30 rounded-lg px-6 py-4 transition">
             <p className="text-gray-300">
-              <span className="text-purple-400 font-bold">{events.length}</span>{" "}
-              events found
+              <span className="text-purple-400 font-bold">
+                {availableEvents.length}
+              </span>{" "}
+              events available for booking
               {filters.search && ` matching "${filters.search}"`}
               {filters.category && ` in ${filters.category}`}
               {filters.location && ` near ${filters.location}`}
+              {user && bookedEventIds.length > 0 && (
+                <span className="text-green-400 ml-2">
+                  ({bookedEventIds.length} already booked)
+                </span>
+              )}
             </p>
           </div>
         </div>
@@ -169,23 +192,27 @@ export default function EventListing() {
         )}
 
         {/* Events Grid */}
-        {!loading && events.length > 0 && (
+        {!loading && availableEvents.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
-            {events.map((event) => (
+            {availableEvents.map((event) => (
               <EventCard key={event._id} event={event} />
             ))}
           </div>
         )}
 
         {/* No Results State */}
-        {!loading && events.length === 0 && !error && (
+        {!loading && availableEvents.length === 0 && !error && (
           <div className="text-center py-20">
             <Search className="mx-auto text-gray-600 mb-4" size={64} />
             <h3 className="text-2xl font-bold text-gray-300 mb-2">
-              No events found
+              {events.length > 0
+                ? "You have booked all available events!"
+                : "No events found"}
             </h3>
             <p className="text-gray-400 mb-8">
-              Try adjusting your filters to find more events
+              {events.length > 0
+                ? "Check out your bookings in your profile or wait for new events"
+                : "Try adjusting your filters to find more events"}
             </p>
             <button
               onClick={() =>
@@ -193,7 +220,7 @@ export default function EventListing() {
               }
               className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300"
             >
-              View All Events
+              {events.length > 0 ? "View Bookings" : "View All Events"}
             </button>
           </div>
         )}

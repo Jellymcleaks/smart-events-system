@@ -36,9 +36,9 @@ export default function EventCard({ event }) {
 
   return (
     <Link to={`/events/${event._id}`}>
-      <div className="group relative glass-card-interactive shadow-xl shadow-purple-500/10 h-full flex flex-col overflow-hidden hover:shadow-2xl hover:shadow-purple-500/30">
+      <div className="group relative glass-card-interactive shadow-xl shadow-purple-500/10 h-full flex flex-col overflow-hidden hover:shadow-2xl hover:shadow-purple-500/30 rounded-xl sm:rounded-2xl transition">
         {/* Image Container */}
-        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-purple-900/50 to-black/50 backdrop-blur-md">
+        <div className="relative h-32 sm:h-40 md:h-48 overflow-hidden bg-gradient-to-br from-purple-900/50 to-black/50 backdrop-blur-md">
           <img
             src={
               event.image || "https://via.placeholder.com/300x200?text=Event"
@@ -49,18 +49,18 @@ export default function EventCard({ event }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent backdrop-blur-sm" />
 
           {/* Category Badge */}
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-2 sm:top-3 left-2 sm:left-3">
             <div
-              className={`inline-block bg-gradient-to-r ${gradientClass} text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg backdrop-blur-md bg-opacity-90 hover:shadow-lg hover:shadow-purple-500/40 transition transform group-hover:scale-110`}
+              className={`inline-block bg-gradient-to-r ${gradientClass} text-white px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs font-bold shadow-lg backdrop-blur-md bg-opacity-90 hover:shadow-lg hover:shadow-purple-500/40 transition transform group-hover:scale-110`}
             >
               {event.category}
             </div>
           </div>
 
           {/* Occupancy Badge */}
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3">
             <div
-              className={`text-white font-bold text-sm px-3 py-1 rounded-full backdrop-blur-sm ${
+              className={`text-white font-bold text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full backdrop-blur-sm ${
                 occupancyPercentage > 80
                   ? "bg-red-500/80 shadow-lg shadow-red-500/40"
                   : occupancyPercentage > 50
@@ -74,62 +74,62 @@ export default function EventCard({ event }) {
         </div>
 
         {/* Content */}
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-4 sm:p-6 flex flex-col flex-grow">
           {/* Title */}
-          <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition duration-300">
+          <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition duration-300">
             {event.title}
           </h3>
 
           {/* Description */}
-          <p className="text-gray-300 text-sm mb-4 line-clamp-2 flex-grow group-hover:text-gray-200 transition">
+          <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 flex-grow group-hover:text-gray-200 transition">
             {event.description}
           </p>
 
           {/* Event Info Grid */}
-          <div className="space-y-3 mb-4 text-sm">
-            <div className="flex items-center space-x-3 text-gray-300 group-hover:text-purple-300 transition">
-              <Calendar size={16} className="text-purple-400 flex-shrink-0" />
-              <span>
+          <div className="space-y-2 mb-3 sm:mb-4 text-xs sm:text-sm">
+            <div className="flex items-center space-x-2 text-gray-300 group-hover:text-purple-300 transition truncate">
+              <Calendar size={14} className="text-purple-400 flex-shrink-0" />
+              <span className="truncate">
                 {formattedDate} at {event.time}
               </span>
             </div>
 
-            <div className="flex items-center space-x-3 text-gray-300 group-hover:text-purple-300 transition">
-              <MapPin size={16} className="text-purple-400 flex-shrink-0" />
+            <div className="flex items-center space-x-2 text-gray-300 group-hover:text-purple-300 transition truncate">
+              <MapPin size={14} className="text-purple-400 flex-shrink-0" />
               <span className="truncate">{event.location}</span>
             </div>
 
-            <div className="flex items-center space-x-3 text-gray-300 group-hover:text-purple-300 transition">
-              <Users size={16} className="text-purple-400 flex-shrink-0" />
+            <div className="flex items-center space-x-2 text-gray-300 group-hover:text-purple-300 transition">
+              <Users size={14} className="text-purple-400 flex-shrink-0" />
               <span>
-                {event.attendees}/{event.capacity} attending
+                {event.attendees}/{event.capacity}
               </span>
             </div>
 
-            <div className="flex items-center space-x-3">
-              <span className="font-bold text-pink-400 text-lg group-hover:text-pink-300 transition">
+            <div className="flex items-center space-x-2">
+              <span className="font-bold text-pink-400 text-sm sm:text-base group-hover:text-pink-300 transition">
                 ₹{event.ticketPrice}
               </span>
             </div>
           </div>
 
           {/* Capacity Bar */}
-          <div className="mb-4">
-            <div className="w-full bg-white/5 backdrop-blur-sm rounded-full h-2 overflow-hidden border border-white/10">
+          <div className="mb-3 sm:mb-4">
+            <div className="w-full bg-white/5 backdrop-blur-sm rounded-full h-1.5 sm:h-2 overflow-hidden border border-white/10">
               <div
                 className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-300 shadow-lg shadow-purple-500/50"
                 style={{ width: `${occupancyPercentage}%` }}
               />
             </div>
-            <p className="text-xs text-gray-400 mt-2 group-hover:text-purple-300 transition">
+            <p className="text-xs text-gray-400 mt-1 sm:mt-2 group-hover:text-purple-300 transition">
               {seatsAvailable} seats available
             </p>
           </div>
 
           {/* CTA Button */}
-          <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-3 rounded-lg font-semibold transition duration-300 flex items-center justify-center space-x-2 transform group-hover:translate-x-1 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50">
+          <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white py-2 sm:py-3 rounded-lg font-semibold transition duration-300 flex items-center justify-center space-x-2 transform group-hover:translate-x-1 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 text-sm sm:text-base">
             <span>View Details</span>
-            <ArrowRight size={18} />
+            <ArrowRight size={16} className="hidden sm:block" />
           </button>
         </div>
 

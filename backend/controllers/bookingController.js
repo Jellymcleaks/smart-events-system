@@ -1,8 +1,58 @@
 const Booking = require("../models/Booking");
 const Event = require("../models/Event");
+const crypto = require("crypto");
 
 /**
- * Create Booking
+ * Get User Booked Event IDs
+ * GET /api/bookings/user/booked-events
+ */
+exports.getUserBookedEventIds = async (req, res) => {
+  try {
+    const bookings = await Booking.find({
+      userId: req.user.id,
+      status: "confirmed",
+    }).select("eventId");
+
+    const bookedEventIds = bookings.map((b) => b.eventId.toString());
+
+    res.status(200).json({
+      bookedEventIds,
+    });
+  } catch (error) {
+    console.error("Error fetching booked events:", error);
+    res
+      .status(500)
+      .json({ message: "Server error while fetching booked events" });
+  }
+};
+
+/**
+ * Get User Booked Event IDs
+ * GET /api/bookings/user/booked-events
+ */
+exports.getUserBookedEventIds = async (req, res) => {
+  try {
+    const bookings = await Booking.find({
+      userId: req.user.id,
+      status: "confirmed",
+      paymentStatus: "completed",
+    }).select("eventId");
+
+    const bookedEventIds = bookings.map((b) => b.eventId.toString());
+
+    res.status(200).json({
+      bookedEventIds,
+    });
+  } catch (error) {
+    console.error("Error fetching booked events:", error);
+    res
+      .status(500)
+      .json({ message: "Server error while fetching booked events" });
+  }
+};
+
+/**
+ * Create Booking (Legacy - without payment)
  * POST /api/bookings
  */
 exports.createBooking = async (req, res) => {

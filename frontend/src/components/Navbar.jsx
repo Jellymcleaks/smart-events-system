@@ -131,18 +131,18 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 space-y-2 bg-black/30 backdrop-blur-lg rounded-lg border border-purple-500/20">
+          <div className="md:hidden pb-6 space-y-1 bg-black/50 backdrop-blur-lg rounded-b-lg border-t border-purple-500/20">
             <Link
               to="/"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg"
+              className="block px-4 py-3 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg text-sm sm:text-base"
             >
               Home
             </Link>
             <Link
               to="/events"
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg"
+              className="block px-4 py-3 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg text-sm sm:text-base"
             >
               Browse Events
             </Link>
@@ -154,14 +154,14 @@ export default function Navbar() {
                     <Link
                       to="/create-event"
                       onClick={() => setIsOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-3 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg text-sm sm:text-base"
                     >
                       Create Event
                     </Link>
                     <Link
                       to="/dashboard"
                       onClick={() => setIsOpen(false)}
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      className="block px-4 py-3 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg text-sm sm:text-base"
                     >
                       Dashboard
                     </Link>
@@ -172,36 +172,47 @@ export default function Navbar() {
                   <Link
                     to="/my-bookings"
                     onClick={() => setIsOpen(false)}
-                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-3 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg text-sm sm:text-base"
                   >
                     My Bookings
                   </Link>
                 )}
 
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-red-500 hover:bg-red-50"
-                >
-                  Logout
-                </button>
+                <div className="border-t border-purple-500/20 pt-2 mt-2">
+                  <div className="flex items-center space-x-2 px-4 py-3 text-purple-400 text-sm sm:text-base">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                      <span className="text-white text-xs font-bold">
+                        {user.name.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    <span className="text-gray-200">{user.name}</span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-3 text-red-400 hover:text-red-300 hover:bg-red-500/10 transition rounded-lg flex items-center space-x-2 text-sm sm:text-base"
+                  >
+                    <LogOut size={16} />
+                    <span>Logout</span>
+                  </button>
+                </div>
               </>
             ) : (
-              <>
+              <div className="border-t border-purple-500/20 pt-2 mt-2 space-y-1">
                 <Link
                   to="/login"
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-3 text-gray-200 hover:text-purple-300 hover:bg-purple-600/20 transition rounded-lg text-sm sm:text-base"
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-2 text-blue-600 hover:bg-gray-100"
+                  className="block px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white rounded-lg transition font-semibold text-sm sm:text-base"
                 >
                   Sign Up
                 </Link>
-              </>
+              </div>
             )}
           </div>
         )}

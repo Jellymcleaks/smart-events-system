@@ -6,10 +6,17 @@ const {
   getBookingStats,
   getOrganizerBookingStats,
   getEventBookings,
+  getUserBookedEventIds,
 } = require("../controllers/bookingController");
 const { auth, isOrganizer } = require("../middleware/auth");
 
 const router = express.Router();
+
+/**
+ * GET /api/bookings/user/booked-events
+ * Get list of booked event IDs for current user
+ */
+router.get("/user/booked-events", auth, getUserBookedEventIds);
 
 /**
  * POST /api/bookings

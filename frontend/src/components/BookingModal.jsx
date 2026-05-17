@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { X, CreditCard } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 import { createBooking } from "../services/bookingService";
 
 /**
  * Booking Modal Component
  */
 export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
+  const { user } = useAuth();
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -17,17 +19,14 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
     e.preventDefault();
     setLoading(true);
     setError("");
-
     try {
-      await createBooking({
-        eventId: event._id,
-        quantity: parseInt(quantity),
-      });
-
+      // Create booking directly (no external payment)
+      await createBooking({ eventId: event._id, quantity: parseInt(quantity) });
+      setError("");
       onSuccess?.();
       handleClose();
     } catch (err) {
-      setError(err.message || "Failed to create booking");
+      setError(err.message || "Booking failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -46,9 +45,12 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
       <div className="glass-card backdrop-blur-2xl border border-purple-500/40 rounded-2xl max-w-md w-full shadow-2xl shadow-purple-500/30">
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-purple-500/20">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Book Tickets
-          </h2>
+          <div className="flex items-center space-x-3">
+            <CreditCard className="text-purple-400" size={24} />
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Book Tickets
+            </h2>
+          </div>
           <button
             onClick={handleClose}
             className="text-purple-400 hover:text-purple-300 transition"
@@ -101,6 +103,14 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
             </div>
           </div>
 
+          {/* Info */}
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+            <p className="text-xs text-blue-300">
+              ✅ Booking will be created immediately without an external payment
+              gateway.
+            </p>
+          </div>
+
           {/* Error */}
           {error && (
             <div className="bg-red-500/20 border border-red-500/50 text-red-300 px-4 py-2 rounded backdrop-blur-sm">
@@ -122,7 +132,9 @@ export default function BookingModal({ event, isOpen, onClose, onSuccess }) {
               disabled={loading || seatsAvailable === 0}
               className="btn-glass-primary flex-1"
             >
-              {loading ? "Processing..." : "Confirm Booking"}
+              {loading
+                ? "Processing..."
+                : `Book Now (₹${totalPrice.toFixed(2)})`}
             </button>
           </div>
         </form>
